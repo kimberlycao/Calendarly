@@ -1,4 +1,4 @@
-# calendarly
+# Calendarly
 
 Calendar flutter app
 
