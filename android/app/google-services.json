@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "608943085712",
+    "firebase_url": "https://calendarly-99572.firebaseio.com",
+    "project_id": "calendarly-99572",
+    "storage_bucket": "calendarly-99572.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608943085712:android:3e2ebd824a89ebad7de015",
+        "android_client_info": {
+          "package_name": "example.calendarly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608943085712-ckfb3iqo3l44pcv1qu1i8e0se83t8aoe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0jmh9aDsnSZW9dTiq5nB24A67mz4wBlA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608943085712-ckfb3iqo3l44pcv1qu1i8e0se83t8aoe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
