@@ -16,22 +16,23 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
         title: Text('Welcome to Calendarly',
-            style: GoogleFonts.libreBaskerville(
-                fontSize: 20.0, color: Colors.white)),
+            style: GoogleFonts.breeSerif(fontSize: 22.0, color: Colors.white)),
       ),
       body: Center(
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-            RaisedButton(child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Sign in with Google", style: TextStyle(color: Colors.white, fontSize: 24),),
-              ), onPressed: //TODO 
-              ,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          RaisedButton(
+              color: Colors.blue,
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Sign in with Google",
+                      style: GoogleFonts.breeSerif(
+                          color: Colors.white, fontSize: 20.0))),
+              onPressed: null)
         ],
       )),
     );
