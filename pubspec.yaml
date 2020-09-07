@@ -26,6 +26,8 @@ dependencies:
 
   google_fonts: ^0.3.2
   table_calendar: ^2.2.3
+  firebase_auth:
+  google_sign_in:
 
 
 
