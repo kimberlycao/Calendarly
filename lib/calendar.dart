@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.orange[50],
       appBar: AppBar(
+        backgroundColor: Colors.orange[50],
         centerTitle: true,
         title: Text('Calendarly',
             style: GoogleFonts.alatsi(fontSize: 20.0, color: Colors.white)),

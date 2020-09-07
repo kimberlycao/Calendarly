@@ -1,8 +1,11 @@
+import 'package:calendarly/calendar.dart';
 import 'package:flutter/material.dart';
-import 'loginpage.dart';
+//import 'loginpage.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 void main() {
-  runApp(MyApp());
+  initializeDateFormatting().then((_) => runApp(MyApp()));
 }
 
 MaterialColor colorCustom = MaterialColor(0xFF1C79E4, color);
@@ -28,7 +31,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: colorCustom,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginScreen(),
+      home: HomePage(),
+      //home: LoginScreen(),
     );
   }
 }
