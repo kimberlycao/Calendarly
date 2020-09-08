@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -25,14 +26,29 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          RaisedButton(
+          /* RaisedButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
               color: Colors.blue,
               child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Sign in with Google",
+                  child: Text("Register",
                       style: GoogleFonts.breeSerif(
                           color: Colors.white, fontSize: 20.0))),
-              onPressed: null)
+              onPressed: null), */
+          SignInButtonBuilder(
+            text: "Sign up with Email",
+            textColor: Colors.white,
+            icon: Icons.mail,
+            onPressed: () {},
+            backgroundColor: Colors.blueGrey,
+          ),
+          SizedBox(height: 20.0),
+          SignInButton(
+            Buttons.Google,
+            text: "Sign up with Google",
+            onPressed: () {},
+          )
         ],
       )),
     );
