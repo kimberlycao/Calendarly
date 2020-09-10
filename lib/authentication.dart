@@ -1,27 +1,30 @@
-/* import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-//Global variables
-FirebaseAuth auth = FirebaseAuth.instance;
-final googleSignIn = GoogleSignIn();
+//Set up instances
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final GoogleSignIn googleSignIn = GoogleSignIn();
 
-//Method that handles Google sign in on the login page
-Future<bool> googleLogIn() async {
-  GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+Future<User> signInWithGoogle() async {
+  final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+  final GoogleSignInAuthentication googleSignInAuthentication =
+      await googleSignInAccount.authentication;
 
-  if (googleSignInAccount != null) {
-    GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
-    AuthCredential credential = GoogleAuthProvider.credential(
-        idToken: googleSignInAuthentication.idToken,
-        accessToken: googleSignInAuthentication.accessToken);
+  final AuthCredential credential = GoogleAuthProvider.credential(
+      idToken: googleSignInAuthentication.idToken,
+      accessToken: googleSignInAuthentication.accessToken);
 
-    AuthResult result = await auth.signInWithCredential(credential);
+  //Takes the user's credentials and authenticates it against Firebase
+  final UserCredential authResult =
+      await _auth.signInWithCredential(credential);
+  final User user = authResult.user;
 
-    User user = await auth.currentUser();
-    print(user.uid);
+  assert(!user.isAnonymous);
+  assert(await user.getIdToken() != null);
 
-    return Future.value(true);
-  }
+  final User currentUser = _auth.currentUser;
+  assert(currentUser.uid == user.uid);
+  print(
+      'signInWithGoogle succeeded: $user'); //to see if the user is signed in successfully
+  return user;
 }
- */
