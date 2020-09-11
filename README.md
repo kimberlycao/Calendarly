@@ -1,4 +1,4 @@
-# Calendarly
+# Calendarly :spiral_calendar:
 
-A calendar app created using Flutter and the table calendar package
+Calendarly is a calendar app created using Flutter and the table calendar package.
 
