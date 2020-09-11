@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,10 +10,29 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   CalendarController _controller;
+  AnimationController _animation;
+  int currentYear;
+  Map<DateTime, String> specialDates;
+
   @override
   void initState() {
     super.initState();
     _controller = CalendarController();
+    //set current year
+    var currentYear = DateTime.now().year;
+
+    specialDates = {
+      DateTime(currentYear, 1, 1): "New Years",
+      DateTime(currentYear, 10, 10): "Naruto Uzamaki's Birthday",
+      DateTime(currentYear, 7, 23): "Sasuke Uchiha's Birthday",
+    };
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _animation.dispose();
+    super.dispose();
   }
 
   Widget build(BuildContext context) {
