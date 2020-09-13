@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.blue[100],
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
@@ -77,7 +77,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       Container(
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                            boxShadow: [BoxShadow(color: Colors.grey[100])]),
+                            color: Colors.blue[200],
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.white60,
+                                  blurRadius: 6.0,
+                                  offset: Offset(0, 2))
+                            ]),
                       ),
                       SizedBox(height: 20),
                       RaisedButton(
@@ -96,6 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         icon: Icons.mail,
                         onPressed: () {},
                         backgroundColor: Colors.grey,
+                        fontSize: 18.0,
                       ),
                       SignInButton(Buttons.Google,
                           text: "Sign up with Google", onPressed: () {})
