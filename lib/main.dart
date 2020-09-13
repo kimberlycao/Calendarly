@@ -9,18 +9,18 @@ void main() {
   runApp(MyApp());
 }
 
-MaterialColor colorCustom = MaterialColor(0xFF1C79E4, color);
+MaterialColor colorCustom = MaterialColor(0xFF0d8cd6, color);
 Map<int, Color> color = {
-  50: Color.fromRGBO(28, 121, 228, .1),
-  100: Color.fromRGBO(28, 121, 228, .2),
-  200: Color.fromRGBO(28, 121, 228, .3),
-  300: Color.fromRGBO(28, 121, 228, .4),
-  400: Color.fromRGBO(28, 121, 228, .5),
-  500: Color.fromRGBO(28, 121, 228, .6),
-  600: Color.fromRGBO(28, 121, 228, .7),
-  700: Color.fromRGBO(28, 121, 228, .8),
-  800: Color.fromRGBO(28, 121, 228, .9),
-  900: Color.fromRGBO(28, 121, 228, 1),
+  50: Color.fromRGBO(13, 140, 214, .1),
+  100: Color.fromRGBO(13, 140, 214, .2),
+  200: Color.fromRGBO(13, 140, 214, .3),
+  300: Color.fromRGBO(13, 140, 214, .4),
+  400: Color.fromRGBO(13, 140, 214, .5),
+  500: Color.fromRGBO(13, 140, 214, .6),
+  600: Color.fromRGBO(13, 140, 214, .7),
+  700: Color.fromRGBO(13, 140, 214, .8),
+  800: Color.fromRGBO(13, 140, 214, .9),
+  900: Color.fromRGBO(13, 140, 214, 1),
 };
 
 class MyApp extends StatelessWidget {
@@ -29,11 +29,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: colorCustom,
+        primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      //home: HomePage(),
-      home: LoginScreen(),
+      home: HomePage(),
+      //home: LoginScreen(),
     );
   }
 }

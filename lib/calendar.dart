@@ -37,33 +37,44 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange[50],
-      appBar: AppBar(
-        backgroundColor: Colors.orange[50],
-        centerTitle: true,
-        title: Text('Calendarly',
-            style: GoogleFonts.alatsi(fontSize: 20.0, color: Colors.white)),
-      ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: 35.0),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 32),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Calendarly",
+                      style: GoogleFonts.breeSerif(fontSize: 30.0)),
+                ],
+              ),
+            ),
             TableCalendar(
                 initialCalendarFormat: CalendarFormat.month,
                 calendarStyle: CalendarStyle(
-                  todayColor: Colors.orange[200],
-                  selectedColor: Colors.orange[400],
+                  todayColor: Colors.blue[400],
+                  selectedColor: Colors.blue[600],
+                  weekendStyle: TextStyle(color: Colors.black.withOpacity(0.3)),
                 ),
                 headerStyle: HeaderStyle(
                     centerHeaderTitle: true,
                     formatButtonShowsNext: false,
+                    formatButtonTextStyle:
+                        GoogleFonts.breeSerif(color: Colors.white),
                     formatButtonDecoration: BoxDecoration(
-                        color: Colors.orange[200],
+                        color: Colors.blue[600],
                         borderRadius: BorderRadius.circular(30.0)),
-                    titleTextStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
-                    )),
+                    titleTextStyle: GoogleFonts.breeSerif(
+                        fontSize: 20.0, color: Colors.black)),
+                daysOfWeekStyle: DaysOfWeekStyle(
+                    weekdayStyle:
+                        GoogleFonts.breeSerif(fontWeight: FontWeight.bold),
+                    weekendStyle: GoogleFonts.breeSerif(
+                        fontWeight: FontWeight.bold, color: Colors.black)),
                 calendarController: _controller)
           ],
         ),
