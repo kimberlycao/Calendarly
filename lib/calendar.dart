@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 35.0),
+            SizedBox(height: 40.0),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 32),
               child: Column(
@@ -75,7 +75,27 @@ class _HomePageState extends State<HomePage> {
                         GoogleFonts.breeSerif(fontWeight: FontWeight.bold),
                     weekendStyle: GoogleFonts.breeSerif(
                         fontWeight: FontWeight.bold, color: Colors.black)),
-                calendarController: _controller)
+                calendarController: _controller),
+            SizedBox(height: 10.0),
+            Container(
+              padding: EdgeInsets.only(left: 30.0),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.55,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50)),
+                  color: Colors.blue),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 15.0),
+                  Text("Tasks for Today:",
+                      style: GoogleFonts.breeSerif(
+                          color: Colors.white, fontSize: 20.0))
+                ],
+              ),
+            ),
           ],
         ),
       ),

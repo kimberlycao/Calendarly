@@ -1,9 +1,7 @@
-import 'package:calendarly/calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'authentication.dart';
-import 'dart:math' as math;
 
 void main() {
   runApp(MaterialApp(
@@ -66,8 +64,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: BoxDecoration(
                     color: Colors.blue[200],
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(60),
-                        topRight: Radius.circular(60))),
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50))),
                 child: Padding(
                   padding: EdgeInsets.all(20),
                   child: Column(

@@ -1,6 +1,7 @@
 import 'package:calendarly/calendar.dart';
 import 'package:flutter/material.dart';
 import 'loginpage.dart';
+import 'addevent.dart';
 //import 'package:intl/date_symbol_data_local.dart';
 //import 'package:table_calendar/table_calendar.dart';
 
@@ -27,13 +28,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: HomePage(),
-      //home: LoginScreen(),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        //home: HomePage(),
+        //home: LoginScreen(),
+        home: AddEvent());
   }
 }
