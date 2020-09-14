@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class AddEvent extends StatefulWidget {
   @override
@@ -7,9 +8,8 @@ class AddEvent extends StatefulWidget {
 }
 
 class _AddEventState extends State<AddEvent> {
-  DateTime _taskDate;
-  TimeOfDay _time;
-
+  DateTime _taskDate = DateTime.now();
+  TimeOfDay _timeOfDay = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +40,41 @@ class _AddEventState extends State<AddEvent> {
             SizedBox(height: 25.0),
             Card(
                 child: ListTile(
-              title: Text("Task Date",
-                  style: GoogleFonts.breeSerif(fontSize: 18.0)),
+              title: Text("Date", style: GoogleFonts.breeSerif(fontSize: 18.0)),
+              subtitle:
+                  Text("${_taskDate.month}-${_taskDate.day}-${_taskDate.year}"),
               leading: Icon(Icons.calendar_today),
+              onTap: () async {
+                DateTime picked = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(2100));
+                if (picked != null) {
+                  setState(() {
+                    _taskDate = picked;
+                  });
+                }
+              },
+              // subtitle: Text(
+              //     "${_taskDate.month} - ${_taskDate.day} - ${_taskDate.year}"),
+            )),
+            SizedBox(height: 25.0),
+            Card(
+                child: ListTile(
+              title: Text("Time", style: GoogleFonts.breeSerif(fontSize: 18.0)),
+              leading: Icon(Icons.alarm),
+              subtitle: Text(_timeOfDay.format(context)),
+              onTap: () async {
+                TimeOfDay picked = await showTimePicker(
+                    context: context, initialTime: _timeOfDay);
+
+                if (picked != null) {
+                  setState(() {
+                    _timeOfDay = picked;
+                  });
+                }
+              },
             )),
             SizedBox(height: 25.0),
             TextFormField(
