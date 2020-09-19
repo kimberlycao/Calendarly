@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 //Set up instances
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -28,3 +29,8 @@ Future<User> signInWithGoogle() async {
       'signInWithGoogle succeeded: $user'); //to see if the user is signed in successfully
   return user;
 }
+
+//Email and password sign up
+// Future<String> createUserWithEmailandPassword(String email, String password, String name) async {
+
+// }

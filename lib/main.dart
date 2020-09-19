@@ -1,11 +1,15 @@
 import 'package:calendarly/calendar.dart';
 import 'package:flutter/material.dart';
-import 'loginpage.dart';
-import 'addevent.dart';
+import 'login_page.dart';
+import 'add_event.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 //import 'package:intl/date_symbol_data_local.dart';
 //import 'package:table_calendar/table_calendar.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   //initializeDateFormatting().then((_) => runApp(MyApp()));
   runApp(MyApp());
 }
@@ -33,8 +37,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        //home: HomePage(),
-        //home: LoginScreen(),
-        home: AddEvent());
+        home: HomePage());
+    //home: LoginScreen());
+    //home: AddEvent());
   }
 }
