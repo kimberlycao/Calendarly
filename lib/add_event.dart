@@ -1,3 +1,4 @@
+import 'package:calendarly/calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,8 +21,20 @@ class _AddEventState extends State<AddEvent> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 25.0),
-                Text("Add New Task",
-                    style: GoogleFonts.breeSerif(fontSize: 30.0)),
+                Row(
+                  children: [
+                    BackButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
+                      },
+                    ),
+                    Text("Add New Task",
+                        style: GoogleFonts.breeSerif(fontSize: 30.0)),
+                  ],
+                ),
                 SizedBox(height: 25.0),
                 TextFormField(
                   validator: (val) {

@@ -55,14 +55,19 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text("Calendarly",
                             style: GoogleFonts.breeSerif(fontSize: 30.0)),
-                        FloatingActionButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AddEvent()));
-                          },
-                          child: Icon(Icons.add),
+                        SizedBox(
+                          height: 35.0,
+                          width: 35.0,
+                          child: FloatingActionButton(
+                            backgroundColor: Colors.blue[600],
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AddEvent()));
+                            },
+                            child: Icon(Icons.add),
+                          ),
                         ),
                       ],
                     ),
