@@ -1,7 +1,8 @@
+import 'package:calendarly/register.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'authentication.dart';
+import 'auth.dart';
 import 'calendar.dart';
 
 void main() {
@@ -16,6 +17,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String email;
+  String password;
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +62,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    //Icon(Icons.calendar_today, color: Colors.white),
                   ],
                 ),
               ),
@@ -141,7 +145,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           text: "Sign up with Email",
                           textColor: Colors.white,
                           icon: Icons.mail,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RegisterWithEmail()));
+                          },
                           backgroundColor: Colors.grey,
                           fontSize: 18.0,
                         ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'add_event.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'register.dart';
 
 //import 'package:intl/date_symbol_data_local.dart';
 //import 'package:table_calendar/table_calendar.dart';
@@ -37,8 +38,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: HomePage());
-    //home: LoginScreen());
-    //home: AddEvent());
+        //home: HomePage());
+        //home: LoginScreen());
+        //home: AddEvent());
+        home: RegisterWithEmail());
   }
 }
