@@ -1,7 +1,8 @@
+import 'package:calendarly/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:email_validator/email_validator.dart';
+import 'homepage.dart';
 
 class RegisterWithEmail extends StatefulWidget {
   @override
@@ -21,8 +22,18 @@ class _RegisterWithEmailState extends State<RegisterWithEmail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 25),
-              Text("Register with Email",
-                  style: GoogleFonts.breeSerif(fontSize: 30.0)),
+              Row(
+                children: [
+                  BackButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
+                    },
+                  ),
+                  Text("Register with Email",
+                      style: GoogleFonts.breeSerif(fontSize: 30.0))
+                ],
+              ),
               SizedBox(height: 25.0),
               TextFormField(
                 validator: validateEmail,
@@ -64,7 +75,10 @@ class _RegisterWithEmailState extends State<RegisterWithEmail> {
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0)),
-                    onPressed: null,
+                    onPressed: () => signUp(email.trim(), password, context)
+                        .whenComplete(() => Navigator.of(context)
+                            .pushReplacement(MaterialPageRoute(
+                                builder: (context) => HomePage()))),
                     disabledColor: Colors.blue, //remove afterwards
                     child: Text("Register",
                         style: GoogleFonts.breeSerif(

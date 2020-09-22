@@ -1,9 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/material.dart';
 
 //Set up instances
 final FirebaseAuth auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
+
+showErrorDialog(BuildContext context, String error) {
+  // to hide the keyboard, if it is still p
+  FocusScope.of(context).requestFocus(new FocusNode());
+  return showDialog(
+    context: context,
+    child: AlertDialog(
+      title: Text("Error"),
+      content: Text(error),
+      actions: <Widget>[
+        OutlineButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text("Ok"),
+        ),
+      ],
+    ),
+  );
+}
 
 Future<User> signInWithGoogle() async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -28,38 +49,61 @@ Future<User> signInWithGoogle() async {
   return user;
 }
 
-Future<bool> signUp(String email, String password) async {
+Future<User> signUp(String email, String password, BuildContext context) async {
   try {
     UserCredential result = await auth.createUserWithEmailAndPassword(
-        email: email, password: password);
-
-    return Future.value(true);
+        email: email, password: email);
+    User user = result.user;
+    return Future.value(user);
   } catch (e) {
-    if (e.code == 'weak-password') {
-      print('The password provided is too weak.');
-    } else if (e.code == 'email-already-in-use') {
-      print('The account already exists for that email.');
-    } else if (e.code == 'error-weak-password') {
-      print('Please choose a stronger password.');
+    switch (e.code) {
+      case 'ERROR_EMAIL_ALREADY_IN_USE':
+        showErrorDialog(context, "Email Already Exists");
+        break;
+      case 'ERROR_INVALID_EMAIL':
+        showErrorDialog(context, "Invalid Email Address");
+        break;
+      case 'ERROR_WEAK_PASSWORD':
+        showErrorDialog(context, "Please choose a stronger password");
+        break;
     }
+    return Future.value(null);
   }
 }
 
-Future<bool> signIn(String email, String password) async {
+Future<User> signIn(String email, String password, BuildContext context) async {
   try {
     UserCredential result =
         await auth.signInWithEmailAndPassword(email: email, password: password);
-
-    return Future.value(true);
+    User user = result.user;
+    return Future.value(user);
   } catch (e) {
-    if (e.code == 'user-not-found') {
-      print('No user found for that email.');
-    } else if (e.code == 'wrong-password') {
-      print('Wrong password provided for that user.');
+    print(e.code);
+    switch (e.code) {
+      case 'ERROR_INVALID_EMAIL':
+        showErrorDialog(context, e.code);
+        break;
+      case 'ERROR_WRONG_PASSWORD':
+        showErrorDialog(context, e.code);
+        break;
+      case 'ERROR_USER_NOT_FOUND':
+        showErrorDialog(context, e.code);
+        break;
+      case 'ERROR_USER_DISABLED':
+        showErrorDialog(context, e.code);
+        break;
+      case 'ERROR_TOO_MANY_REQUESTS':
+        showErrorDialog(context, e.code);
+        break;
+      case 'ERROR_OPERATION_NOT_ALLOWED':
+        showErrorDialog(context, e.code);
+        break;
     }
+
+    return Future.value(null);
   }
 }
 
-Future<bool> signOut() async {
+signOut() async {
   await FirebaseAuth.instance.signOut();
 }

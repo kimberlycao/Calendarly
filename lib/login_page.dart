@@ -1,9 +1,9 @@
-import 'package:calendarly/register.dart';
+import 'package:calendarly/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'auth.dart';
-import 'calendar.dart';
+import 'homepage.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
@@ -125,18 +125,22 @@ class _LoginScreenState extends State<LoginScreen> {
                               ]),
                           height: 60.0,
                           child: TextFormField(
-                              obscureText: true,
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  contentPadding: EdgeInsets.only(top: 30.0),
-                                  prefixIcon:
-                                      Icon(Icons.lock, color: Colors.white),
-                                  hintText: "Password",
-                                  hintStyle: GoogleFonts.breeSerif(
-                                      color: Colors.white)),
-                              validator: RequiredValidator(
-                                  errorText: "Password is required.")),
+                            obscureText: true,
+                            style: TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.only(top: 30.0),
+                                prefixIcon:
+                                    Icon(Icons.lock, color: Colors.white),
+                                hintText: "Password",
+                                hintStyle:
+                                    GoogleFonts.breeSerif(color: Colors.white)),
+                            validator: RequiredValidator(
+                                errorText: "Password is required."),
+                            onChanged: (val) {
+                              password = val;
+                            },
+                          ),
                         ),
                         SizedBox(height: 20.0),
                         RaisedButton(
@@ -148,7 +152,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Text("Sign into My Account",
                                     style: GoogleFonts.breeSerif(
                                         color: Colors.white, fontSize: 18.0))),
-                            onPressed: null),
+                            onPressed: () {
+                              signIn(email.trim(), password, context)
+                                  .whenComplete(() => Navigator.of(context)
+                                      .pushReplacement(MaterialPageRoute(
+                                          builder: (context) => HomePage())));
+                            }),
                         SignInButtonBuilder(
                           text: "Sign up with Email",
                           textColor: Colors.white,

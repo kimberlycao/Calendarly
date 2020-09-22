@@ -1,9 +1,9 @@
-import 'package:calendarly/calendar.dart';
+import 'package:calendarly/homepage.dart';
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'add_event.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'register.dart';
+import 'register_page.dart';
 
 //import 'package:intl/date_symbol_data_local.dart';
 //import 'package:table_calendar/table_calendar.dart';
@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         //home: HomePage());
-        //home: LoginScreen());
-        //home: AddEvent());
-        home: RegisterWithEmail());
+        home: LoginScreen());
+    //home: AddEvent());
+    //home: RegisterWithEmail());
   }
 }
