@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'auth.dart';
 import 'calendar.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -91,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     offset: Offset(0, 2))
                               ]),
                           height: 60.0,
-                          child: TextField(
+                          child: TextFormField(
                             keyboardType: TextInputType.emailAddress,
                             style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
@@ -99,9 +101,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 contentPadding: EdgeInsets.only(top: 30.0),
                                 prefixIcon:
                                     Icon(Icons.email, color: Colors.white),
-                                hintText: "Enter your email",
+                                hintText: "Email",
                                 hintStyle:
                                     GoogleFonts.breeSerif(color: Colors.white)),
+                            validator: RequiredValidator(
+                                errorText: "This Field Is Required"),
+                            onChanged: (val) {
+                              email = val;
+                            },
                           ),
                         ),
                         SizedBox(height: 20),
@@ -117,18 +124,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                     offset: Offset(0, 2))
                               ]),
                           height: 60.0,
-                          child: TextField(
-                            obscureText: true,
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 30.0),
-                                prefixIcon:
-                                    Icon(Icons.lock, color: Colors.white),
-                                hintText: "Password",
-                                hintStyle:
-                                    GoogleFonts.breeSerif(color: Colors.white)),
-                          ),
+                          child: TextFormField(
+                              obscureText: true,
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  contentPadding: EdgeInsets.only(top: 30.0),
+                                  prefixIcon:
+                                      Icon(Icons.lock, color: Colors.white),
+                                  hintText: "Password",
+                                  hintStyle: GoogleFonts.breeSerif(
+                                      color: Colors.white)),
+                              validator: RequiredValidator(
+                                  errorText: "Password is required.")),
                         ),
                         SizedBox(height: 20.0),
                         RaisedButton(

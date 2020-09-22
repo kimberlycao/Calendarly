@@ -39,6 +39,8 @@ Future<bool> signUp(String email, String password) async {
       print('The password provided is too weak.');
     } else if (e.code == 'email-already-in-use') {
       print('The account already exists for that email.');
+    } else if (e.code == 'error-weak-password') {
+      print('Please choose a stronger password.');
     }
   }
 }
