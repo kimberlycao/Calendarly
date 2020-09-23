@@ -1,30 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-//Set up instances
 final FirebaseAuth auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
-
-showErrorDialog(BuildContext context, String error) {
-  // to hide the keyboard, if it is still p
-  FocusScope.of(context).requestFocus(new FocusNode());
-  return showDialog(
-    context: context,
-    child: AlertDialog(
-      title: Text("Error"),
-      content: Text(error),
-      actions: <Widget>[
-        OutlineButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text("Ok"),
-        ),
-      ],
-    ),
-  );
-}
 
 Future<User> signInWithGoogle() async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -49,59 +28,81 @@ Future<User> signInWithGoogle() async {
   return user;
 }
 
-Future<User> signUp(String email, String password, BuildContext context) async {
+Future<String> signUp(String email, String password) async {
+  User user;
+  String errorMessage;
+
   try {
     UserCredential result = await auth.createUserWithEmailAndPassword(
-        email: email, password: email);
-    User user = result.user;
-    return Future.value(user);
-  } catch (e) {
-    switch (e.code) {
-      case 'ERROR_EMAIL_ALREADY_IN_USE':
-        showErrorDialog(context, "Email Already Exists");
+        email: email, password: password);
+    user = result.user;
+  } on PlatformException catch (error) {
+    switch (error.code) {
+      case "ERROR_OPERATION_NOT_ALLOWED":
+        errorMessage = "Anonymous accounts are not enabled";
         break;
-      case 'ERROR_INVALID_EMAIL':
-        showErrorDialog(context, "Invalid Email Address");
+      case "ERROR_WEAK_PASSWORD":
+        errorMessage = "Your password is too weak";
         break;
-      case 'ERROR_WEAK_PASSWORD':
-        showErrorDialog(context, "Please choose a stronger password");
+      case "ERROR_INVALID_EMAIL":
+        errorMessage = "Your email is invalid";
         break;
+      case "ERROR_EMAIL_ALREADY_IN_USE":
+        errorMessage = "Email is already in use on different account";
+        break;
+      case "ERROR_INVALID_CREDENTIAL":
+        errorMessage = "Your email is invalid";
+        break;
+
+      default:
+        errorMessage = "An undefined Error happened.";
     }
-    return Future.value(null);
   }
+  if (errorMessage != null) {
+    return Future.error(errorMessage);
+  }
+
+  return user.uid;
 }
 
-Future<User> signIn(String email, String password, BuildContext context) async {
+Future<String> signIn(String email, String password) async {
+  User user;
+  String errorMessage;
+
   try {
     UserCredential result =
         await auth.signInWithEmailAndPassword(email: email, password: password);
-    User user = result.user;
-    return Future.value(user);
-  } catch (e) {
-    print(e.code);
-    switch (e.code) {
-      case 'ERROR_INVALID_EMAIL':
-        showErrorDialog(context, e.code);
+    user = result.user;
+  } on PlatformException catch (error) {
+    switch (error.code) {
+      case "ERROR_INVALID_EMAIL":
+        errorMessage = "Your email address appears to be malformed.";
         break;
-      case 'ERROR_WRONG_PASSWORD':
-        showErrorDialog(context, e.code);
+      case "ERROR_WRONG_PASSWORD":
+        errorMessage = "Your password is wrong.";
         break;
-      case 'ERROR_USER_NOT_FOUND':
-        showErrorDialog(context, e.code);
+      case "ERROR_USER_NOT_FOUND":
+        errorMessage = "User with this email doesn't exist.";
         break;
-      case 'ERROR_USER_DISABLED':
-        showErrorDialog(context, e.code);
+      case "ERROR_USER_DISABLED":
+        errorMessage = "User with this email has been disabled.";
         break;
-      case 'ERROR_TOO_MANY_REQUESTS':
-        showErrorDialog(context, e.code);
+      case "ERROR_TOO_MANY_REQUESTS":
+        errorMessage = "Too many requests. Try again later.";
         break;
-      case 'ERROR_OPERATION_NOT_ALLOWED':
-        showErrorDialog(context, e.code);
+      case "ERROR_OPERATION_NOT_ALLOWED":
+        errorMessage = "Signing in with Email and Password is not enabled.";
         break;
+      default:
+        errorMessage = "An undefined Error happened.";
     }
-
-    return Future.value(null);
   }
+
+  if (errorMessage != null) {
+    return Future.error(errorMessage);
+  }
+
+  return user.uid;
 }
 
 signOut() async {

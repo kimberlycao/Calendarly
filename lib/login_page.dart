@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'auth.dart';
-import 'homepage.dart';
-import 'package:email_validator/email_validator.dart';
+import 'home_page.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 void main() {
@@ -22,6 +21,24 @@ class _LoginScreenState extends State<LoginScreen> {
   String email;
   String password;
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
+  void login() {
+    if (formkey.currentState.validate()) {
+      formkey.currentState.save();
+      signIn(
+        email.trim(),
+        password.trim(),
+      ).then((value) {
+        if (value != null) {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(),
+              ));
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,91 +99,95 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 40,
                         ),
                         Container(
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              color: Colors.blue[200],
-                              borderRadius: BorderRadius.circular(10.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.white60,
-                                    blurRadius: 10.0,
-                                    offset: Offset(0, 2))
-                              ]),
-                          height: 60.0,
-                          child: TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 30.0),
-                                prefixIcon:
-                                    Icon(Icons.email, color: Colors.white),
-                                hintText: "Email",
-                                hintStyle:
-                                    GoogleFonts.breeSerif(color: Colors.white)),
-                            validator: RequiredValidator(
-                                errorText: "This Field Is Required"),
-                            onChanged: (val) {
-                              email = val;
-                            },
+                          child: Form(
+                            key: formkey,
+                            child: Column(children: [
+                              Container(
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    color: Colors.blue[200],
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.white60,
+                                          blurRadius: 10.0,
+                                          offset: Offset(0, 2))
+                                    ]),
+                                height: 60.0,
+                                child: TextFormField(
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      contentPadding:
+                                          EdgeInsets.only(top: 30.0),
+                                      prefixIcon: Icon(Icons.email,
+                                          color: Colors.white),
+                                      hintText: "Email",
+                                      hintStyle: GoogleFonts.breeSerif(
+                                          color: Colors.white)),
+                                  validator: RequiredValidator(
+                                      errorText: "This Field Is Required"),
+                                  onChanged: (val) {
+                                    email = val;
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              Container(
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    color: Colors.blue[200],
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.white60,
+                                          blurRadius: 10.0,
+                                          offset: Offset(0, 2))
+                                    ]),
+                                height: 60.0,
+                                child: TextFormField(
+                                  obscureText: true,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      contentPadding:
+                                          EdgeInsets.only(top: 30.0),
+                                      prefixIcon:
+                                          Icon(Icons.lock, color: Colors.white),
+                                      hintText: "Password",
+                                      hintStyle: GoogleFonts.breeSerif(
+                                          color: Colors.white)),
+                                  validator: RequiredValidator(
+                                      errorText: "Password is required."),
+                                  onChanged: (val) {
+                                    password = val;
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: 20.0),
+                              RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(2.0)),
+                                  color: Colors.blue,
+                                  child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("Sign into My Account",
+                                          style: GoogleFonts.breeSerif(
+                                              color: Colors.white,
+                                              fontSize: 18.0))),
+                                  onPressed: () {
+                                    login();
+                                  }),
+                            ]),
                           ),
                         ),
-                        SizedBox(height: 20),
-                        Container(
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              color: Colors.blue[200],
-                              borderRadius: BorderRadius.circular(10.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.white60,
-                                    blurRadius: 10.0,
-                                    offset: Offset(0, 2))
-                              ]),
-                          height: 60.0,
-                          child: TextFormField(
-                            obscureText: true,
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 30.0),
-                                prefixIcon:
-                                    Icon(Icons.lock, color: Colors.white),
-                                hintText: "Password",
-                                hintStyle:
-                                    GoogleFonts.breeSerif(color: Colors.white)),
-                            validator: RequiredValidator(
-                                errorText: "Password is required."),
-                            onChanged: (val) {
-                              password = val;
-                            },
-                          ),
-                        ),
-                        SizedBox(height: 20.0),
-                        RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(2.0)),
-                            color: Colors.blue,
-                            child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Sign into My Account",
-                                    style: GoogleFonts.breeSerif(
-                                        color: Colors.white, fontSize: 18.0))),
-                            onPressed: () {
-                              signIn(email.trim(), password, context)
-                                  .whenComplete(() => Navigator.of(context)
-                                      .pushReplacement(MaterialPageRoute(
-                                          builder: (context) => HomePage())));
-                            }),
                         SignInButtonBuilder(
                           text: "Sign up with Email",
                           textColor: Colors.white,
                           icon: Icons.mail,
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RegisterWithEmail()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => RegisterWithEmail()));
                           },
                           backgroundColor: Colors.grey,
                           fontSize: 18.0,

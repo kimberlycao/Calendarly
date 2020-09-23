@@ -2,7 +2,7 @@ import 'package:calendarly/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'homepage.dart';
+import 'home_page.dart';
 
 class RegisterWithEmail extends StatefulWidget {
   @override
@@ -12,6 +12,23 @@ class RegisterWithEmail extends StatefulWidget {
 class _RegisterWithEmailState extends State<RegisterWithEmail> {
   String email;
   String password;
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
+  void signUserUp() {
+    if (formkey.currentState.validate()) {
+      formkey.currentState.save();
+      signUp(email.trim(), password.trim()).then((value) {
+        if (value != null) {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(),
+              ));
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,42 +66,47 @@ class _RegisterWithEmailState extends State<RegisterWithEmail> {
                 },
               ),
               SizedBox(height: 25.0),
-              TextFormField(
-                obscureText: true,
-                validator: MultiValidator([
-                  RequiredValidator(errorText: "This Field Is Required."),
-                  MinLengthValidator(8,
-                      errorText: "Password must be 8 characters in length!")
-                ]),
-                style: GoogleFonts.breeSerif(fontSize: 18.0),
-                decoration: InputDecoration(
-                    labelText: "Password",
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25))),
-                onChanged: (val) {
-                  password = val;
-                },
-              ),
-              SizedBox(height: 20.0),
-              Center(
-                child: ButtonTheme(
-                  minWidth: 300.0,
-                  height: 50.0,
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0)),
-                    onPressed: () => signUp(email.trim(), password, context)
-                        .whenComplete(() => Navigator.of(context)
-                            .pushReplacement(MaterialPageRoute(
-                                builder: (context) => HomePage()))),
-                    disabledColor: Colors.blue, //remove afterwards
-                    child: Text("Register",
-                        style: GoogleFonts.breeSerif(
-                            fontSize: 18.0, color: Colors.white)),
-                    color: Colors.blue,
-                  ),
+              Container(
+                child: Form(
+                  key: formkey,
+                  child: Column(children: [
+                    TextFormField(
+                      obscureText: true,
+                      validator: MultiValidator([
+                        RequiredValidator(errorText: "This Field Is Required."),
+                        MinLengthValidator(6,
+                            errorText:
+                                "Password must be 8 characters in length!")
+                      ]),
+                      style: GoogleFonts.breeSerif(fontSize: 18.0),
+                      decoration: InputDecoration(
+                          labelText: "Password",
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25))),
+                      onChanged: (val) {
+                        password = val;
+                      },
+                    ),
+                    SizedBox(height: 20.0),
+                    Center(
+                      child: ButtonTheme(
+                        minWidth: 300.0,
+                        height: 50.0,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0)),
+                          onPressed: signUserUp,
+                          disabledColor: Colors.blue, //remove afterwards
+                          child: Text("Register",
+                              style: GoogleFonts.breeSerif(
+                                  fontSize: 18.0, color: Colors.white)),
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  ]),
                 ),
               ),
             ],
