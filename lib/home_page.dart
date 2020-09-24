@@ -7,13 +7,17 @@ import 'calendar.dart';
 import 'auth.dart';
 
 class HomePage extends StatefulWidget {
+  final String uid;
+  HomePage({Key key, @required this.uid}) : super(key: key);
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(uid);
 }
 
 class _HomePageState extends State<HomePage> {
+  final String uid;
+  _HomePageState(this.uid);
   CalendarController _controller;
-  AnimationController _animation;
+  //AnimationController _animation;
 
   @override
   void initState() {
@@ -22,11 +26,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    _animation.dispose();
-    super.dispose();
-  }
+  // void dispose() {
+  //   _controller.dispose();
+  //   _animation.dispose();
+  //   super.dispose();
+  // }
 
   Widget build(BuildContext context) {
     return Scaffold(

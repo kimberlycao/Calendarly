@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 final FirebaseAuth auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
-Future<User> signInWithGoogle() async {
+Future<String> signInWithGoogle() async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
   final GoogleSignInAuthentication googleSignInAuthentication =
       await googleSignInAccount.authentication;
@@ -25,7 +25,7 @@ Future<User> signInWithGoogle() async {
   assert(currentUser.uid == user.uid);
   print(
       'signInWithGoogle succeeded: $user'); //to see if the user is signed in successfully
-  return user;
+  return user.uid;
 }
 
 Future<String> signUp(String email, String password) async {
