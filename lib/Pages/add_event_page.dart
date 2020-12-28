@@ -1,4 +1,4 @@
-import 'package:calendarly/home_page.dart';
+import 'package:calendarly/Pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -117,7 +117,7 @@ class _AddEventState extends State<AddEvent> {
                     child: RaisedButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0)),
-                      onPressed: null,
+                      onPressed: () {},
                       disabledColor: Colors.blue, //remove afterwards
                       child: Text("Save",
                           style: GoogleFonts.breeSerif(

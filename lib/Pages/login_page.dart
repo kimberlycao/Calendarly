@@ -1,16 +1,10 @@
-import 'package:calendarly/register_page.dart';
+import 'package:calendarly/Pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'auth.dart';
+import '../Firebase/auth.dart';
 import 'home_page.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-
-void main() {
-  runApp(MaterialApp(
-    home: LoginScreen(),
-  ));
-}
 
 class LoginScreen extends StatefulWidget {
   @override

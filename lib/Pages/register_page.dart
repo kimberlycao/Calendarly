@@ -1,4 +1,4 @@
-import 'package:calendarly/auth.dart';
+import 'package:calendarly/Firebase/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:form_field_validator/form_field_validator.dart';

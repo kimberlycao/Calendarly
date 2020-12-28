@@ -1,23 +1,22 @@
-import 'package:calendarly/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'add_event.dart';
-import 'calendar.dart';
-import 'auth.dart';
+import 'package:calendarly/Pages/add_event_page.dart';
+import 'package:calendarly/Widgets/calendar.dart';
+import 'package:calendarly/Firebase/auth.dart';
+import 'package:calendarly/Pages/login_page.dart';
 
 class HomePage extends StatefulWidget {
-  final String uid;
-  HomePage({Key key, @required this.uid}) : super(key: key);
+  // final String uid;
+  // HomePage({Key key, @required this.uid}) : super(key: key);
   @override
-  _HomePageState createState() => _HomePageState(uid);
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final String uid;
-  _HomePageState(this.uid);
+  // final String uid;
+  _HomePageState();
   CalendarController _controller;
-  //AnimationController _animation;
 
   @override
   void initState() {
@@ -26,12 +25,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  // void dispose() {
-  //   _controller.dispose();
-  //   _animation.dispose();
-  //   super.dispose();
-  // }
-
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,

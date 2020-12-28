@@ -1,9 +1,10 @@
-import 'package:calendarly/home_page.dart';
+import 'package:calendarly/Pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'login_page.dart';
-import 'add_event.dart';
+import 'Pages/login_page.dart';
+import 'Pages/add_event_page.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'register_page.dart';
+import 'Pages/register_page.dart';
+import 'package:calendarly/event_model.dart';
 
 //import 'package:intl/date_symbol_data_local.dart';
 //import 'package:table_calendar/table_calendar.dart';
@@ -33,14 +34,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        //home: HomePage());
-        home: LoginScreen());
-    //home: AddEvent());
-    //home: RegisterWithEmail());
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      //home: HomePage());
+      //home: LoginScreen());
+      //home: AddEvent(event: event));
+      home: RegisterWithEmail(),
+      routes: {
+        '/home': (_) => HomePage(),
+        '/add_event': (_) => AddEvent(),
+        '/register': (_) => RegisterWithEmail(),
+      },
+    );
   }
 }
