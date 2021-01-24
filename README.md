@@ -1,9 +1,9 @@
 <h1 align="center"> Calendarly </h1>
 
 ## Table of Contents
-[Introduction](#introduction)
-[Developing](#developing)
-[Screenshot](#screenshot)
+- [Introduction](#introduction)
+- [Developing](#developing)
+- [Screenshot](#screenshot)
 
 ## Introduction
 
