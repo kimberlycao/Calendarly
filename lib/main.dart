@@ -1,10 +1,8 @@
 import 'package:calendarly/Pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'Pages/login_page.dart';
 import 'Pages/add_event_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'Pages/register_page.dart';
-import 'package:calendarly/event_model.dart';
 
 //import 'package:intl/date_symbol_data_local.dart';
 //import 'package:table_calendar/table_calendar.dart';
