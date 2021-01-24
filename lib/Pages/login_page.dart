@@ -42,12 +42,15 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Container(
           width: double.infinity, //spans the entire width of the screen
           decoration: BoxDecoration(
-              gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-            Colors.blue[900],
-            Colors.blue[700],
-            Colors.blue[500],
-            Colors.blue[300]
-          ])),
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                Colors.blue[900],
+                Colors.blue[700],
+                Colors.blue[500],
+                Colors.blue[300]
+              ])),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
